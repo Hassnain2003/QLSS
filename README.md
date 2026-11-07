@@ -223,7 +223,3 @@ On first launch the app's startup path seeds a small set of campus services into
 - Add a real "10-second booking" measurement harness if instant booking is a
   product requirement (it is not currently measurable).
 
-## Team
-
-**Hassnain Abbas** — [Backend lead](team): Firebase Auth, Cloud Firestore, and
-Cloud Functions.
