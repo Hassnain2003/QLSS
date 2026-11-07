@@ -199,17 +199,8 @@ On first launch the app's startup path seeds a small set of campus services into
   starting point.
 - The handler dashboard opens on a per-role service; there is no central
   "all queues for all staff" dashboard.
-- Café seat booking keeps its seat map in memory only for the current session
-  (not persisted to Firestore), so seats can be re-booked by another user on a
-  fresh session. Seat limits are soft.
 - There is no Cloud Function back end: price/queue logic executes in the client.
-- "10-second bookings" is **not** something this app measures — no timing or
-  throughput instrumentation exists anywhere in the code. Booking a slot means a
-  user-facing wait of the chosen slot time; queue position and estimated wait
-  minutes are computed from token order and the service's configured
-  `minutesPerPerson`.
-- Registration for handler accounts uses a hard-coded security phrase
-  (`accessgranted`). This is a placeholder gate, not real identity proof.
+
 
 ## Roadmap
 
