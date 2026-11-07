@@ -68,7 +68,7 @@ graph TD
     F -->|handler| H[read/write their service queue]
     G --> A
     H --> A
-    I[seed script (startup)] --> D
+    I[seed script] --> D
     J[Firestore collections] --> D
 ```
 
