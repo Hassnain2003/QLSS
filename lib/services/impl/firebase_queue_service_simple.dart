@@ -196,34 +196,18 @@ class SimpleFirebaseQueueService implements qs.QueueService {
         .get();
 
     final pendingDocs = snapshot.docs
-        .where((doc) => (doc.data() as Map<String, dynamic>)['status'] == 'pending')
+        .where((doc) => (doc.data())['status'] == 'pending')
         .toList();
 
     if (pendingDocs.isEmpty) return;
 
     pendingDocs.sort((a, b) {
-      final aCreated = (a.data() as Map<String, dynamic>)['createdAt'] as Timestamp;
-      final bCreated = (b.data() as Map<String, dynamic>)['createdAt'] as Timestamp;
+      final aCreated = (a.data())['createdAt'] as Timestamp;
+      final bCreated = (b.data())['createdAt'] as Timestamp;
       return aCreated.compareTo(bCreated);
     });
 
     await pendingDocs.first.reference.update({'status': 'inProgress'});
-  }
-
-  @override
-  Future<void> markAsCompleted(String appointmentId) async {
-    await _firestore.collection('appointments').doc(appointmentId).update({
-      'status': 'completed',
-      'completedAt': Timestamp.now(),
-    });
-  }
-
-  @override
-  Future<void> markAsCancelled(String appointmentId) async {
-    await _firestore.collection('appointments').doc(appointmentId).update({
-      'status': 'cancelled',
-      'cancelledAt': Timestamp.now(),
-    });
   }
 
   @override
@@ -237,14 +221,14 @@ class SimpleFirebaseQueueService implements qs.QueueService {
         .get();
 
     final pendingDocs = snapshot.docs
-        .where((doc) => (doc.data() as Map<String, dynamic>)['status'] == 'pending')
+        .where((doc) => (doc.data())['status'] == 'pending')
         .toList();
 
     if (pendingDocs.isEmpty) return 0;
 
     pendingDocs.sort((a, b) {
-      final aTime = (a.data() as Map<String, dynamic>)['scheduledTime'] as Timestamp;
-      final bTime = (b.data() as Map<String, dynamic>)['scheduledTime'] as Timestamp;
+      final aTime = (a.data())['scheduledTime'] as Timestamp;
+      final bTime = (b.data())['scheduledTime'] as Timestamp;
       return aTime.compareTo(bTime);
     });
     
@@ -271,12 +255,12 @@ class SimpleFirebaseQueueService implements qs.QueueService {
         .get();
 
     final pendingDocs = snapshot.docs
-        .where((doc) => (doc.data() as Map<String, dynamic>)['status'] == 'pending')
+        .where((doc) => (doc.data())['status'] == 'pending')
         .toList();
 
     pendingDocs.sort((a, b) {
-      final aCreated = (a.data() as Map<String, dynamic>)['createdAt'] as Timestamp;
-      final bCreated = (b.data() as Map<String, dynamic>)['createdAt'] as Timestamp;
+      final aCreated = (a.data())['createdAt'] as Timestamp;
+      final bCreated = (b.data())['createdAt'] as Timestamp;
       return aCreated.compareTo(bCreated);
     });
 
@@ -332,7 +316,7 @@ class SimpleFirebaseQueueService implements qs.QueueService {
             throw StateError('Service not found');
           }
 
-          final serviceData = serviceQuery.docs.first.data() as Map<String, dynamic>;
+          final serviceData = serviceQuery.docs.first.data();
           final service = Service(
             id: serviceId,
             name: serviceData['name'] as String,

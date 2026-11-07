@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../../models/appointment.dart';
-import '../../services/queue_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
 import '../../widgets/primary_button.dart';

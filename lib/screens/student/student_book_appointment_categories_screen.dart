@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../../models/service.dart';
-import '../../services/queue_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
-import '../../widgets/primary_button.dart';
 import 'book_slot_screen.dart';
-import 'student_cafe_booking_screen.dart';
 
 class StudentBookAppointmentCategoriesScreen extends StatefulWidget {
   const StudentBookAppointmentCategoriesScreen({super.key});

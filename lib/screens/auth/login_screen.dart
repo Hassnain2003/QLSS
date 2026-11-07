@@ -84,12 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: scheme.outlineVariant.withOpacity(0.8)),
+      borderSide: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.8)),
     );
 
     final focusedBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: AppColors.primaryBlue.withOpacity(0.9), width: 1.4),
+      borderSide: BorderSide(color: AppColors.primaryBlue.withValues(alpha: 0.9), width: 1.4),
     );
 
     return Scaffold(
@@ -105,9 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      AppColors.primaryBlue.withOpacity(0.14),
+                      AppColors.primaryBlue.withValues(alpha: 0.14),
                       Colors.white,
-                      AppColors.accentGreen.withOpacity(0.10),
+                      AppColors.accentGreen.withValues(alpha: 0.10),
                     ],
                     stops: const [0, 0.55, 1],
                   ),
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: const EdgeInsets.only(top: 8, right: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.primaryBlue.withOpacity(0.08),
+                    color: AppColors.primaryBlue.withValues(alpha: 0.08),
                   ),
                 ),
               ),
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: const EdgeInsets.only(bottom: 8, left: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.accentGreen.withOpacity(0.08),
+                    color: AppColors.accentGreen.withValues(alpha: 0.08),
                   ),
                 ),
               ),
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Smart Appointment Manager for Bahria University',
                           textAlign: TextAlign.center,
                           style: AppTextStyles.body.copyWith(
-                            color: AppColors.textDark.withOpacity(0.65),
+                            color: AppColors.textDark.withValues(alpha: 0.65),
                           ),
                         ),
                         const SizedBox(height: 18),
@@ -168,11 +168,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18),
                             border: Border.all(
-                              color: scheme.outlineVariant.withOpacity(0.55),
+                              color: scheme.outlineVariant.withValues(alpha: 0.55),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 18,
                                 offset: const Offset(0, 12),
                               ),
@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Text(
                                   'Sign in to continue',
                                   style: AppTextStyles.body.copyWith(
-                                    color: AppColors.textDark.withOpacity(0.60),
+                                    color: AppColors.textDark.withValues(alpha: 0.60),
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -222,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: ButtonStyle(
                                     backgroundColor: WidgetStateProperty.resolveWith(
                                       (states) => states.contains(WidgetState.selected)
-                                          ? AppColors.primaryBlue.withOpacity(0.10)
+                                          ? AppColors.primaryBlue.withValues(alpha: 0.10)
                                           : Colors.transparent,
                                     ),
                                     foregroundColor: WidgetStateProperty.resolveWith(
@@ -231,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           : AppColors.textDark,
                                     ),
                                     side: WidgetStatePropertyAll(
-                                      BorderSide(color: scheme.outlineVariant.withOpacity(0.7)),
+                                      BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.7)),
                                     ),
                                     shape: WidgetStatePropertyAll(
                                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -256,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     labelText: 'Email',
                                     prefixIcon: const Icon(Icons.mail_outline),
                                     filled: true,
-                                    fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                    fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                     border: inputBorder,
                                     enabledBorder: inputBorder,
                                     focusedBorder: focusedBorder,
@@ -295,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                     filled: true,
-                                    fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                    fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                     border: inputBorder,
                                     enabledBorder: inputBorder,
                                     focusedBorder: focusedBorder,
@@ -310,10 +310,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
                                             decoration: BoxDecoration(
-                                              color: AppColors.errorRed.withOpacity(0.08),
+                                              color: AppColors.errorRed.withValues(alpha: 0.08),
                                               borderRadius: BorderRadius.circular(12),
                                               border: Border.all(
-                                                color: AppColors.errorRed.withOpacity(0.22),
+                                                color: AppColors.errorRed.withValues(alpha: 0.22),
                                               ),
                                             ),
                                             child: Row(
@@ -348,7 +348,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Text(
                                       "Don't have an account?",
                                       style: AppTextStyles.body.copyWith(
-                                        color: AppColors.textDark.withOpacity(0.7),
+                                        color: AppColors.textDark.withValues(alpha: 0.7),
                                       ),
                                     ),
                                     TextButton(

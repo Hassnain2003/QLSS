@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../../models/appointment.dart';
-import '../../models/service.dart';
 import '../../models/user.dart';
-import '../../services/auth_service.dart';
-import '../../services/queue_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
 import '../../widgets/primary_button.dart';
@@ -254,6 +251,7 @@ class _HandlerDashboardScreenState extends State<HandlerDashboardScreen> {
                   final deps = QueueLessDependencies.of(context);
                   await deps.authService.logout();
                   if (mounted) {
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (_) => const LoginScreen()),
                       (route) => false,
@@ -469,9 +467,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    AppColors.primaryBlue.withOpacity(0.14),
+                    AppColors.primaryBlue.withValues(alpha: 0.14),
                     Colors.white,
-                    AppColors.accentGreen.withOpacity(0.10),
+                    AppColors.accentGreen.withValues(alpha: 0.10),
                   ],
                   stops: const [0, 0.55, 1],
                 ),
@@ -485,7 +483,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                 margin: const EdgeInsets.only(top: 8, right: 8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primaryBlue.withOpacity(0.08),
+                  color: AppColors.primaryBlue.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -497,7 +495,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                 margin: const EdgeInsets.only(bottom: 8, left: 8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.accentGreen.withOpacity(0.08),
+                  color: AppColors.accentGreen.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -511,9 +509,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.92),
+                          color: Colors.white.withValues(alpha: 0.92),
                           borderRadius: BorderRadius.circular(18),
-                          border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -528,7 +526,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                             const SizedBox(height: 8),
                             Text(
                               snapshot.error.toString(),
-                              style: AppTextStyles.body.copyWith(color: AppColors.textDark.withOpacity(0.65)),
+                              style: AppTextStyles.body.copyWith(color: AppColors.textDark.withValues(alpha: 0.65)),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -549,7 +547,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                 final pending = queue.where((a) => a.status == AppointmentStatus.pending).toList()
                   ..sort((a, b) => a.tokenNumber.compareTo(b.tokenNumber));
                 final completed = queue.where((a) => a.status == AppointmentStatus.completed).toList()
-                  ..sort((a, b) => (b.createdAt ?? DateTime.now()).compareTo(a.createdAt ?? DateTime.now()));
+                  ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
                 final Appointment? nowServing = current.isEmpty ? null : current.first;
 
                 return CustomScrollView(
@@ -562,9 +560,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.75),
+                                color: Colors.white.withValues(alpha: 0.75),
                                 borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                                border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -573,7 +571,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                     height: 28,
                                     width: 28,
                                     decoration: BoxDecoration(
-                                      color: AppColors.primaryBlue.withOpacity(0.12),
+                                      color: AppColors.primaryBlue.withValues(alpha: 0.12),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Icon(Icons.badge_outlined, size: 16, color: AppColors.primaryBlue),
@@ -618,15 +616,15 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                         child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.92),
+                            color: Colors.white.withValues(alpha: 0.92),
                             borderRadius: BorderRadius.circular(18),
-                            border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                            border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                           ),
                           child: Row(
                             children: [
                               CircleAvatar(
                                 radius: 22,
-                                backgroundColor: AppColors.primaryBlue.withOpacity(0.14),
+                                backgroundColor: AppColors.primaryBlue.withValues(alpha: 0.14),
                                 child: Text(
                                   _initials(widget.currentUser.name),
                                   style: AppTextStyles.body.copyWith(
@@ -651,7 +649,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                     Text(
                                       '${widget.currentUser.handlerRole ?? "Handler"} • ${widget.currentUser.email}',
                                       style: AppTextStyles.body.copyWith(
-                                        color: AppColors.textDark.withOpacity(0.60),
+                                        color: AppColors.textDark.withValues(alpha: 0.60),
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -680,7 +678,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                             Text(
                               'Waiting: ${pending.length}',
                               style: AppTextStyles.body.copyWith(
-                                color: AppColors.textDark.withOpacity(0.6),
+                                color: AppColors.textDark.withValues(alpha: 0.6),
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -696,12 +694,12 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                         child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.92),
+                            color: Colors.white.withValues(alpha: 0.92),
                             borderRadius: BorderRadius.circular(18),
-                            border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                            border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
+                                color: Colors.black.withValues(alpha: 0.04),
                                 blurRadius: 18,
                                 offset: const Offset(0, 12),
                               ),
@@ -711,12 +709,12 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                               ? Column(
                                   children: [
                                     const SizedBox(height: 6),
-                                    Icon(Icons.people_outline, size: 44, color: AppColors.textDark.withOpacity(0.40)),
+                                    Icon(Icons.people_outline, size: 44, color: AppColors.textDark.withValues(alpha: 0.40)),
                                     const SizedBox(height: 10),
                                     Text(
                                       'No one in progress',
                                       style: AppTextStyles.body.copyWith(
-                                        color: AppColors.textDark.withOpacity(0.62),
+                                        color: AppColors.textDark.withValues(alpha: 0.62),
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -726,7 +724,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                           ? 'Accept a booking below to start serving.'
                                           : 'Call next from the queue to start serving.',
                                       style: AppTextStyles.body.copyWith(
-                                        color: AppColors.textDark.withOpacity(0.55),
+                                        color: AppColors.textDark.withValues(alpha: 0.55),
                                         fontSize: 12,
                                       ),
                                       textAlign: TextAlign.center,
@@ -767,7 +765,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                                 Text(
                                                   'Seats: ${nowServing.seatNumbers!.join(', ')}${nowServing.durationMinutes != null ? ' • ${nowServing.durationMinutes} min' : ''}',
                                                   style: AppTextStyles.body.copyWith(
-                                                    color: AppColors.textDark.withOpacity(0.60),
+                                                    color: AppColors.textDark.withValues(alpha: 0.60),
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -776,7 +774,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                                 Text(
                                                   'Enrollment: ${nowServing.userEnrollment}',
                                                   style: AppTextStyles.body.copyWith(
-                                                    color: AppColors.textDark.withOpacity(0.60),
+                                                    color: AppColors.textDark.withValues(alpha: 0.60),
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -870,9 +868,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                           child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.92),
+                              color: Colors.white.withValues(alpha: 0.92),
                               borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                              border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                             ),
                             child: Row(
                               children: [
@@ -880,7 +878,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                   height: 44,
                                   width: 44,
                                   decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.10),
+                                    color: Colors.green.withValues(alpha: 0.10),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: const Icon(Icons.check_circle_outline, color: Colors.green),
@@ -890,7 +888,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                   child: Text(
                                     'No one waiting right now.',
                                     style: AppTextStyles.body.copyWith(
-                                      color: AppColors.textDark.withOpacity(0.70),
+                                      color: AppColors.textDark.withValues(alpha: 0.70),
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -914,9 +912,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                             return Container(
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.92),
+                                color: Colors.white.withValues(alpha: 0.92),
                                 borderRadius: BorderRadius.circular(18),
-                                border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                                border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                               ),
                               child: Row(
                                 children: [
@@ -924,7 +922,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                     width: 46,
                                     height: 46,
                                     decoration: BoxDecoration(
-                                      color: AppColors.primaryBlue.withOpacity(0.10),
+                                      color: AppColors.primaryBlue.withValues(alpha: 0.10),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: Center(
@@ -954,7 +952,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                           Text(
                                             seatLine,
                                             style: AppTextStyles.body.copyWith(
-                                              color: AppColors.textDark.withOpacity(0.60),
+                                              color: AppColors.textDark.withValues(alpha: 0.60),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -963,7 +961,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                           Text(
                                             appointment.userEnrollment!,
                                             style: AppTextStyles.body.copyWith(
-                                              color: AppColors.textDark.withOpacity(0.60),
+                                              color: AppColors.textDark.withValues(alpha: 0.60),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -972,7 +970,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                         Text(
                                           'Waiting ${index + 1}',
                                           style: AppTextStyles.body.copyWith(
-                                            color: AppColors.textDark.withOpacity(0.50),
+                                            color: AppColors.textDark.withValues(alpha: 0.50),
                                             fontSize: 11,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -1055,9 +1053,9 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                             return Container(
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.92),
+                                color: Colors.white.withValues(alpha: 0.92),
                                 borderRadius: BorderRadius.circular(18),
-                                border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                                border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                               ),
                               child: Row(
                                 children: [
@@ -1065,7 +1063,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                     width: 46,
                                     height: 46,
                                     decoration: BoxDecoration(
-                                      color: Colors.green.withOpacity(0.10),
+                                      color: Colors.green.withValues(alpha: 0.10),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: Center(
@@ -1095,7 +1093,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                           Text(
                                             seatLine,
                                             style: AppTextStyles.body.copyWith(
-                                              color: AppColors.textDark.withOpacity(0.60),
+                                              color: AppColors.textDark.withValues(alpha: 0.60),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -1104,7 +1102,7 @@ class _HandlerDashboardContentState extends State<HandlerDashboardContent> {
                                           Text(
                                             appointment.userEnrollment!,
                                             style: AppTextStyles.body.copyWith(
-                                              color: AppColors.textDark.withOpacity(0.60),
+                                              color: AppColors.textDark.withValues(alpha: 0.60),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -1153,9 +1151,9 @@ class _StatusPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: color.withOpacity(0.22)),
+        border: Border.all(color: color.withValues(alpha: 0.22)),
       ),
       child: Text(
         text,

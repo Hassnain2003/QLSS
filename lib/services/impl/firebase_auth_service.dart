@@ -187,22 +187,6 @@ class FirebaseAuthService implements AuthService {
       throw Exception('Logout failed: ${e.toString()}');
     }
   }
-
-  AppUser? _convertFirebaseUser(User? user) {
-    if (user == null) return null;
-
-    // Get additional user data from Firestore
-    // For now, return basic user info - the role will be loaded as needed
-    return AppUser(
-      id: user.uid,
-      name: user.displayName ?? '',
-      email: user.email ?? '',
-      role: UserRole.student, // Default, will be updated from Firestore
-      handlerRole: null, // Will be updated from Firestore
-      canteen: null, // Will be updated from Firestore
-    );
-  }
-
   Future<AppUser?> getUserWithRole(String uid) async {
     try {
       print('Getting user document for UID: $uid');
