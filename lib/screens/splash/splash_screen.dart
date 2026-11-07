@@ -19,26 +19,52 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  StreamSubscription? _subscription;
+  Timer? _initTimer;
+  Timer? _fallbackTimer;
+
   @override
   void initState() {
     super.initState();
     _init();
   }
 
-  Future<void> _init() async {
-    await Future.delayed(const Duration(milliseconds: 800));
-    if (!mounted) return;
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    _initTimer?.cancel();
+    _fallbackTimer?.cancel();
+    super.dispose();
+  }
+
+  void _init() {
+    _initTimer = Timer(const Duration(milliseconds: 800), () {
+      if (!mounted) return;
+      _initTimer = null;
+      _listenToAuth();
+    });
+
+    // Add timeout as fallback
+    _fallbackTimer = Timer(const Duration(seconds: 15), () {
+      if (!mounted) return;
+      _fallbackTimer = null;
+      _subscription?.cancel();
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const LoginScreen()),
+        );
+      }
+    });
+  }
+
+  void _listenToAuth() {
     final deps = QueueLessDependencies.of(context);
     final AuthService authService = deps.authService;
-    
-    // Listen to auth state changes properly
-    StreamSubscription? subscription;
-    subscription = authService.authStateChanges().listen((user) {
+    _subscription = authService.authStateChanges().listen((user) {
       if (!mounted) return;
-      
-      // Cancel subscription after first event
-      subscription?.cancel();
-      
+      _subscription?.cancel();
+      _subscription = null;
+
       if (user == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const LoginScreen()),
@@ -51,18 +77,6 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_) => HandlerDashboardScreen(initialUser: user)),
-          );
-        }
-      }
-    });
-    
-    // Add timeout as fallback
-    Future.delayed(const Duration(seconds: 15), () {
-      if (subscription != null && !subscription.isPaused) {
-        subscription.cancel();
-        if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const LoginScreen()),
           );
         }
       }
