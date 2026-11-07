@@ -4,7 +4,6 @@
 "take a numbered ticket and wait in line" experience for university offices and
 campus cafés, for both students and the staff who serve them.
 
-> Placeholder section — **TODO**: add screenshots/GIFs of the actual app here.
 
 ## The problem
 
