@@ -49,7 +49,6 @@ app.*.map.json
 *.env
 .env.local
 .env.*.local
-lib/config/firebase_config.dart
 firebase_options.dart
 google-services.json
 GoogleService-Info.plist

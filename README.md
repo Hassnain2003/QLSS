@@ -120,16 +120,14 @@ That is no longer the default: it has been tightened so that:
    `firebase login`) for emulator/deploy commands.
 
 ### 2. Configure Firebase credentials (no real keys committed)
-The project uses a single config file `lib/config/firebase_config.dart`. A template
-with placeholder values is provided at
-`lib/config/firebase_config.example.dart`.
+The project uses a single config file `lib/config/firebase_config.dart`. It
+ships with **placeholder** values so the app compiles, tests, and boots without
+needing a real Firebase project. Replace them with your own project config
+(below) before running locally.
 
-```bash
-cp lib/config/firebase_config.example.dart lib/config/firebase_config.dart
-```
-Then edit `lib/config/firebase_config.dart` and replace the placeholders with your
-Firebase project's Web config values (API key, Auth domain, project ID, etc.).
-**Never commit the real `lib/config/firebase_config.dart`** (it is gitignored).
+Edit `lib/config/firebase_config.dart` and replace the placeholder values with
+your Firebase project's Web config values (API key, Auth domain, project ID, etc.).
+Only commit the file with your own (or placeholder) values — never push real keys.
 
 ### 3. Install dependencies and run
 ```bash
