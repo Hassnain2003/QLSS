@@ -168,7 +168,7 @@ class _StudentCafeBookingScreenState extends State<StudentCafeBookingScreen> {
                 Text('Duration (max 2 hours)', style: AppTextStyles.body),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<int>(
-                  value: _durationMinutes,
+                  initialValue: _durationMinutes,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                   ),
@@ -241,7 +241,7 @@ class _StudentCafeBookingScreenState extends State<StudentCafeBookingScreen> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: occupied
-              ? AppColors.errorRed.withOpacity(0.1)
+              ? AppColors.errorRed.withValues(alpha: 0.1)
               : selected
                   ? AppColors.primaryBlue
                   : Colors.white,

@@ -10,7 +10,6 @@ import '../../services/queue_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
 import '../../widgets/primary_button.dart';
-import '../../widgets/service_tile.dart';
 import 'simple_booking_categories_screen.dart';
 import 'student_cafe_booking_screen.dart';
 import '../auth/login_screen.dart';
@@ -75,9 +74,9 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    AppColors.primaryBlue.withOpacity(0.14),
+                    AppColors.primaryBlue.withValues(alpha: 0.14),
                     Colors.white,
-                    AppColors.accentGreen.withOpacity(0.10),
+                    AppColors.accentGreen.withValues(alpha: 0.10),
                   ],
                   stops: const [0, 0.55, 1],
                 ),
@@ -91,7 +90,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                 margin: const EdgeInsets.only(top: 8, right: 8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primaryBlue.withOpacity(0.08),
+                  color: AppColors.primaryBlue.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -103,7 +102,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                 margin: const EdgeInsets.only(bottom: 8, left: 8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.accentGreen.withOpacity(0.08),
+                  color: AppColors.accentGreen.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -137,9 +136,9 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.75),
+                                color: Colors.white.withValues(alpha: 0.75),
                                 borderRadius: BorderRadius.circular(14),
-                                border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                                border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -148,7 +147,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                                     height: 28,
                                     width: 28,
                                     decoration: BoxDecoration(
-                                      color: AppColors.primaryBlue.withOpacity(0.12),
+                                      color: AppColors.primaryBlue.withValues(alpha: 0.12),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Icon(Icons.event_available, size: 16, color: AppColors.primaryBlue),
@@ -198,7 +197,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             Text(
                               'Book and track your appointments in one place.',
                               style: AppTextStyles.body.copyWith(
-                                color: AppColors.textDark.withOpacity(0.65),
+                                color: AppColors.textDark.withValues(alpha: 0.65),
                               ),
                             ),
                           ],
@@ -321,9 +320,9 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.85),
+                              color: Colors.white.withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+                              border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
                             ),
                             child: Row(
                               children: [
@@ -331,7 +330,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                                   height: 36,
                                   width: 36,
                                   decoration: BoxDecoration(
-                                    color: AppColors.primaryBlue.withOpacity(0.10),
+                                    color: AppColors.primaryBlue.withValues(alpha: 0.10),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: const Icon(Icons.inbox_outlined, color: AppColors.primaryBlue),
@@ -341,7 +340,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                                   child: Text(
                                     'No bookings yet. Tap “Book appointment” to get started.',
                                     style: AppTextStyles.body.copyWith(
-                                      color: AppColors.textDark.withOpacity(0.7),
+                                      color: AppColors.textDark.withValues(alpha: 0.7),
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -394,7 +393,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             'History',
                             style: AppTextStyles.body.copyWith(
                               fontWeight: FontWeight.w700,
-                              color: AppColors.textDark.withOpacity(0.6),
+                              color: AppColors.textDark.withValues(alpha: 0.6),
                             ),
                           ),
                         ),
@@ -519,9 +518,9 @@ class _ActionCard extends StatelessWidget {
         width: (MediaQuery.of(context).size.width - 18 * 2 - 10) / 2,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(disabled ? 0.55 : 0.86),
+          color: Colors.white.withValues(alpha: disabled ? 0.55 : 0.86),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
         ),
         child: Row(
           children: [
@@ -529,7 +528,7 @@ class _ActionCard extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: color.withOpacity(disabled ? 0.10 : 0.14),
+                color: color.withValues(alpha: disabled ? 0.10 : 0.14),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(icon, color: disabled ? AppColors.textLight : color),
@@ -552,7 +551,7 @@ class _ActionCard extends StatelessWidget {
                     style: AppTextStyles.body.copyWith(
                       color: disabled
                           ? AppColors.textLight
-                          : AppColors.textDark.withOpacity(0.62),
+                          : AppColors.textDark.withValues(alpha: 0.62),
                       fontSize: 12,
                     ),
                     maxLines: 1,
@@ -596,12 +595,12 @@ class _ActiveBookingCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.92),
+          color: Colors.white.withValues(alpha: 0.92),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 18,
               offset: const Offset(0, 12),
             ),
@@ -635,7 +634,7 @@ class _ActiveBookingCard extends StatelessWidget {
             Text(
               'Token #${appointment.tokenNumber} • ${timeFormat.format(appointment.scheduledTime)}',
               style: AppTextStyles.body.copyWith(
-                color: AppColors.textDark.withOpacity(0.65),
+                color: AppColors.textDark.withValues(alpha: 0.65),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -644,7 +643,7 @@ class _ActiveBookingCard extends StatelessWidget {
               Text(
                 seatLine,
                 style: AppTextStyles.body.copyWith(
-                  color: AppColors.textDark.withOpacity(0.65),
+                  color: AppColors.textDark.withValues(alpha: 0.65),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -681,9 +680,9 @@ class _StatusPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: color.withOpacity(0.22)),
+        border: Border.all(color: color.withValues(alpha: 0.22)),
       ),
       child: Text(
         text,
@@ -721,9 +720,9 @@ class _ServiceCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.92),
+          color: Colors.white.withValues(alpha: 0.92),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -734,13 +733,13 @@ class _ServiceCard extends StatelessWidget {
                   height: 38,
                   width: 38,
                   decoration: BoxDecoration(
-                    color: accent.withOpacity(0.14),
+                    color: accent.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(icon, color: accent),
                 ),
                 const Spacer(),
-                Icon(Icons.arrow_forward_ios_rounded, size: 14, color: AppColors.textDark.withOpacity(0.35)),
+                Icon(Icons.arrow_forward_ios_rounded, size: 14, color: AppColors.textDark.withValues(alpha: 0.35)),
               ],
             ),
             const SizedBox(height: 10),
@@ -757,7 +756,7 @@ class _ServiceCard extends StatelessWidget {
             Text(
               service.description,
               style: AppTextStyles.body.copyWith(
-                color: AppColors.textDark.withOpacity(0.58),
+                color: AppColors.textDark.withValues(alpha: 0.58),
                 fontSize: 12,
               ),
               maxLines: 3,
@@ -766,13 +765,13 @@ class _ServiceCard extends StatelessWidget {
             const Spacer(),
             Row(
               children: [
-                Icon(Icons.place_outlined, size: 14, color: AppColors.textDark.withOpacity(0.4)),
+                Icon(Icons.place_outlined, size: 14, color: AppColors.textDark.withValues(alpha: 0.4)),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     service.location,
                     style: AppTextStyles.body.copyWith(
-                      color: AppColors.textDark.withOpacity(0.52),
+                      color: AppColors.textDark.withValues(alpha: 0.52),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
@@ -816,9 +815,9 @@ class _AppointmentTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.92),
+          color: Colors.white.withValues(alpha: 0.92),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: scheme.outlineVariant.withOpacity(0.55)),
+          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.55)),
         ),
         child: Row(
           children: [
@@ -826,7 +825,7 @@ class _AppointmentTile extends StatelessWidget {
               height: 42,
               width: 42,
               decoration: BoxDecoration(
-                color: statusColor.withOpacity(0.12),
+                color: statusColor.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(
@@ -854,7 +853,7 @@ class _AppointmentTile extends StatelessWidget {
                   Text(
                     'Token #${appointment.tokenNumber} • $timeText',
                     style: AppTextStyles.body.copyWith(
-                      color: AppColors.textDark.withOpacity(0.60),
+                      color: AppColors.textDark.withValues(alpha: 0.60),
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),

@@ -117,12 +117,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: scheme.outlineVariant.withOpacity(0.8)),
+      borderSide: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.8)),
     );
 
     final focusedBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(color: AppColors.primaryBlue.withOpacity(0.9), width: 1.4),
+      borderSide: BorderSide(color: AppColors.primaryBlue.withValues(alpha: 0.9), width: 1.4),
     );
 
     return Scaffold(
@@ -138,9 +138,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      AppColors.primaryBlue.withOpacity(0.14),
+                      AppColors.primaryBlue.withValues(alpha: 0.14),
                       Colors.white,
-                      AppColors.accentGreen.withOpacity(0.10),
+                      AppColors.accentGreen.withValues(alpha: 0.10),
                     ],
                     stops: const [0, 0.55, 1],
                   ),
@@ -154,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.only(top: 8, left: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.primaryBlue.withOpacity(0.08),
+                    color: AppColors.primaryBlue.withValues(alpha: 0.08),
                   ),
                 ),
               ),
@@ -166,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   margin: const EdgeInsets.only(bottom: 8, right: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.accentGreen.withOpacity(0.08),
+                    color: AppColors.accentGreen.withValues(alpha: 0.08),
                   ),
                 ),
               ),
@@ -201,11 +201,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18),
                             border: Border.all(
-                              color: scheme.outlineVariant.withOpacity(0.55),
+                              color: scheme.outlineVariant.withValues(alpha: 0.55),
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 18,
                                 offset: const Offset(0, 12),
                               ),
@@ -246,7 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   style: ButtonStyle(
                                     backgroundColor: WidgetStateProperty.resolveWith(
                                       (states) => states.contains(WidgetState.selected)
-                                          ? AppColors.primaryBlue.withOpacity(0.10)
+                                          ? AppColors.primaryBlue.withValues(alpha: 0.10)
                                           : Colors.transparent,
                                     ),
                                     foregroundColor: WidgetStateProperty.resolveWith(
@@ -255,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           : AppColors.textDark,
                                     ),
                                     side: WidgetStatePropertyAll(
-                                      BorderSide(color: scheme.outlineVariant.withOpacity(0.7)),
+                                      BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.7)),
                                     ),
                                     shape: WidgetStatePropertyAll(
                                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -279,7 +279,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: 'Full name',
                                     prefixIcon: const Icon(Icons.person_outline),
                                     filled: true,
-                                    fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                    fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                     border: inputBorder,
                                     enabledBorder: inputBorder,
                                     focusedBorder: focusedBorder,
@@ -303,7 +303,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: 'Email',
                                     prefixIcon: const Icon(Icons.mail_outline),
                                     filled: true,
-                                    fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                    fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                     border: inputBorder,
                                     enabledBorder: inputBorder,
                                     focusedBorder: focusedBorder,
@@ -341,7 +341,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                     filled: true,
-                                    fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                    fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                     border: inputBorder,
                                     enabledBorder: inputBorder,
                                     focusedBorder: focusedBorder,
@@ -364,7 +364,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       labelText: 'Department',
                                       prefixIcon: const Icon(Icons.apartment_outlined),
                                       filled: true,
-                                      fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                      fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                       border: inputBorder,
                                       enabledBorder: inputBorder,
                                       focusedBorder: focusedBorder,
@@ -386,7 +386,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       labelText: 'Enrollment number',
                                       prefixIcon: const Icon(Icons.confirmation_number_outlined),
                                       filled: true,
-                                      fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                      fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                       border: inputBorder,
                                       enabledBorder: inputBorder,
                                       focusedBorder: focusedBorder,
@@ -394,12 +394,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ] else ...[
                                   DropdownButtonFormField<String>(
-                                    value: _handlerRole,
+                                    initialValue: _handlerRole,
                                     decoration: InputDecoration(
                                       labelText: 'Handler role',
                                       prefixIcon: const Icon(Icons.work_outline),
                                       filled: true,
-                                      fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                      fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                       border: inputBorder,
                                       enabledBorder: inputBorder,
                                       focusedBorder: focusedBorder,
@@ -435,12 +435,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   const SizedBox(height: 12),
                                   if (_handlerRole == 'Canteen Staff') ...[
                                     DropdownButtonFormField<String>(
-                                      value: _canteen,
+                                      initialValue: _canteen,
                                       decoration: InputDecoration(
                                         labelText: 'Canteen',
                                         prefixIcon: const Icon(Icons.storefront_outlined),
                                         filled: true,
-                                        fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                        fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                         border: inputBorder,
                                         enabledBorder: inputBorder,
                                         focusedBorder: focusedBorder,
@@ -492,7 +492,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       labelText: 'Handler security code',
                                       prefixIcon: const Icon(Icons.verified_user_outlined),
                                       filled: true,
-                                      fillColor: scheme.surfaceContainerHighest.withOpacity(0.55),
+                                      fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.55),
                                       border: inputBorder,
                                       enabledBorder: inputBorder,
                                       focusedBorder: focusedBorder,
@@ -508,10 +508,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
                                             decoration: BoxDecoration(
-                                              color: AppColors.errorRed.withOpacity(0.08),
+                                              color: AppColors.errorRed.withValues(alpha: 0.08),
                                               borderRadius: BorderRadius.circular(12),
                                               border: Border.all(
-                                                color: AppColors.errorRed.withOpacity(0.22),
+                                                color: AppColors.errorRed.withValues(alpha: 0.22),
                                               ),
                                             ),
                                             child: Row(
@@ -546,7 +546,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Text(
                                       'Already have an account?',
                                       style: AppTextStyles.body.copyWith(
-                                        color: AppColors.textDark.withOpacity(0.7),
+                                        color: AppColors.textDark.withValues(alpha: 0.7),
                                       ),
                                     ),
                                     TextButton(

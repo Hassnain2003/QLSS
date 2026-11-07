@@ -43,3 +43,24 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase / sensitive configuration (never commit real keys)
+.env
+*.env
+.env.local
+.env.*.local
+firebase_options.dart
+google-services.json
+GoogleService-Info.plist
+service-account-*.json
+*.key
+secrets/
+.firebase/
+.firebaserc
+
+# Firebase emulator
+.emulator-*
+
+# IDE
+.idea/
+.vscode/

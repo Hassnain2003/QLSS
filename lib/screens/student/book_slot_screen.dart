@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../../models/appointment.dart';
 import '../../models/service.dart';
-import '../../services/auth_service.dart';
-import '../../services/queue_service.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
 import '../../widgets/primary_button.dart';
@@ -20,7 +18,7 @@ class BookSlotScreen extends StatefulWidget {
 }
 
 class _BookSlotScreenState extends State<BookSlotScreen> {
-  DateTime _selectedDate = DateTime.now();
+  final DateTime _selectedDate = DateTime.now();
   DateTime? _selectedSlot;
   bool _isLoading = false;
   String? _error;
@@ -162,7 +160,7 @@ class _BookSlotScreenState extends State<BookSlotScreen> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: isBusy
-                                  ? AppColors.errorRed.withOpacity(0.1)
+                                  ? AppColors.errorRed.withValues(alpha: 0.1)
                                   : isSelected
                                       ? AppColors.primaryBlue
                                       : Colors.white,

@@ -1,10 +1,61 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow everything - completely open access
-    match /{document=**} {
-      allow read, write: if true;
-      allow read, write: if true;
+    // ------------------------------------------------------------------
+    // SECURITY NOTE
+    // ------------------------------------------------------------------
+    // The previous rules were completely open (`allow read, write: if true`),
+    // meaning anyone could read or write every document. The rules below scope
+    // access by role:
+    //   * Students own their user profile and their own appointments.
+    //   * Handlers (advisors, HOD coordinators, cafeteria staff) can read all
+    //     services and appointments, and update appointments for their service.
+    //   * No one can delete appointments.
+    //
+    // Validate these rules with the Firebase Emulator Suite before promoting
+    // to production (see firestore.rules.test.js).
+    // ------------------------------------------------------------------
+
+    /// True when the request carries a valid Firebase Auth identity.
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /// True when the requester owns the given userId.
+    function isOwner(String uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    /// True when the requester's Firestore user profile has role 'handler'.
+    function isHandler() {
+      return isSignedIn() &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid))
+              .data.role == 'handler';
+    }
+
+    // ---- Users: each user can read/write their own profile only ----
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // ---- Services: anyone signed in can read; handlers can write ----
+    match /services/{serviceId} {
+      allow read: if isSignedIn();
+      allow write: if isHandler();
+    }
+
+    // ---- Appointments ----
+    //   create:  signed-in user booking their own appointment
+    //   read:    owner or any handler
+    //   update:  handler (status changes) or owner (cancellation)
+    //   delete:  not allowed
+    match /appointments/{appointmentId} {
+      allow create: if isSignedIn() && request.auth.uid == request.resource.data.userId;
+      allow read: if isSignedIn() &&
+          (request.auth.uid == resource.data.userId || isHandler());
+      allow update: if isSignedIn() &&
+          (isHandler() || request.auth.uid == resource.data.userId);
+      allow delete: if false;
     }
   }
 }
